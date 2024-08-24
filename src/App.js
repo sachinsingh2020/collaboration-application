@@ -3,7 +3,7 @@ import React from 'react'
 const App = () => {
   return (
     <div
-      className='text-3xl'
+      className=''
     >
       this is new app .sj
     </div>
