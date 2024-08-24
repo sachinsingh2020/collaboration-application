@@ -1,11 +1,10 @@
 import React from 'react'
+import Header from './components/Header'
 
 const App = () => {
   return (
-    <div
-      className=''
-    >
-      this is new app .sj
+    <div>
+      <Header/>
     </div>
   )
 }
