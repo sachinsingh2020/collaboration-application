@@ -8,7 +8,11 @@ const SignInSignUp = () => {
   };
 
   return (
+<<<<<<< HEAD
+    <div className="flex items-center justify-center min-h-screen">
+=======
     <div className="flex items-center justify-center min-h-screen ">
+>>>>>>> b6154cefaf4912cad66176c41f5863c159ab3484
       <div className="bg-black bg-opacity-70 p-8 rounded-2xl shadow-md w-96">
         <h2 className="text-3xl font-semibold text-white text-center mb-6">
           {isSignIn ? "Sign In" : "Sign Up"}
