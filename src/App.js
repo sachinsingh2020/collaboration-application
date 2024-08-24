@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes, useNavigate } from 'react-router-dom'
 import LoginPage from "./Pages/LoginPage";
 import SignUpPage from "./Pages/SignUpPage";
 import HomePage from "./Pages/HomePage";
@@ -9,11 +9,18 @@ import SlideBar from './components/SlideBar';
 import Footer from './components/Footer';
 import Login from './components/Login'
 import { Provider } from 'react-redux';
-import appStore from './utils/appStore'
+import appStore from './utils/appStore';
+import { useSelector } from 'react-redux';
 const App = () => {
-  return (
-    <Provider store={appStore}>
 
+  const {status} = useSelector((state) => state.cards);
+  console.log(status);
+
+  if(status ==false)
+  {
+   // useNavigate
+  }
+  return (
     
     <div
       className='flex text-white'>
@@ -40,7 +47,7 @@ const App = () => {
       <Footer />
     </div>
 
-    </Provider>
+   
   )
 }
 

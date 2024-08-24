@@ -1,40 +1,91 @@
 import React, { useState } from "react";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addStatus } from "../utils/cardSlice";
+
 
 const SignInSignUp = () => {
   const [isSignIn, setIsSignIn] = useState(true);
-
+  const [email, setEmail] = useState(""); // State for email
+  const [password, setPassword] = useState(""); // State for password
+  const [firstName, setfirstname] = useState("");
+  const [lastName,setlastname] = useState("");
+  
+  const dispatch =  useDispatch();
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    
+    try {
+      if (isSignIn) {
+        // Handle sign-in API call
+        const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/login', { email, password });
+        console.log("Sign in successful:", response.data);
+        dispatch(addStatus(true));
+      } else {
+        // Handle sign-up API call
+        const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', {firstName,lastName, email, password });
+        console.log("Sign up successful:", response.data);
+          
+          dispatch(addStatus(true))
+      }
+    } catch (error) {
+
+      alert("no")
+      console.error("There was an error:", error.response ? error.response.data.message : error.message);
+      dispatch(addStatus(false));
+    }
+  };
+  
+
   return (
-<<<<<<< HEAD
     <div className="flex items-center justify-center min-h-screen">
-=======
-    <div className="flex items-center justify-center min-h-screen ">
->>>>>>> b6154cefaf4912cad66176c41f5863c159ab3484
       <div className="bg-black bg-opacity-70 p-8 rounded-2xl shadow-md w-96">
         <h2 className="text-3xl font-semibold text-white text-center mb-6">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h2>
-        <form>
+        <form  onSubmit={handleSubmit}>
+        {!isSignIn && (
+            <input
+              type="text"
+              placeholder="First Name"
+              value={firstName} // Bind value to state
+              onChange={(e) => setfirstname(e.target.value)} // Update state on change
+              className="w-full px-4 py-2 mb-4 border border-gray-700 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
+            />
+
+          )}
+
+          {!isSignIn && (
+            <input
+              type="text"
+              placeholder="Last Name"
+              value={lastName} // Bind value to state
+              onChange={(e) => setlastname(e.target.value)} // Update state on change
+              className="w-full px-4 py-2 mb-4 border border-gray-700 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
+            />
+
+          )}
+
           <input
             type="text"
             placeholder="Email or mobile number"
+            value={email} // Bind value to state
+            onChange={(e) => setEmail(e.target.value)}
+
             className="w-full px-4 py-2 mb-4 border border-gray-700 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
           />
           <input
             type="password"
             placeholder="Password"
+            value={password} // Bind value to state
+            onChange={(e) => setPassword(e.target.value)} // Update state on change
             className="w-full px-4 py-2 mb-4 border border-gray-700 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
           />
-          {!isSignIn && (
-            <input
-              type="password"
-              placeholder="Confirm Password"
-              className="w-full px-4 py-2 mb-4 border border-gray-700 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
-            />
-          )}
+        
           <button
             type="submit"
             className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors"
