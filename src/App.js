@@ -8,8 +8,13 @@ import LikesPage from "./Pages/LikesPage";
 import SlideBar from './components/SlideBar';
 import Footer from './components/Footer';
 import Login from './components/Login'
+import { Provider } from 'react-redux';
+import appStore from './utils/appStore'
 const App = () => {
   return (
+    <Provider store={appStore}>
+
+    
     <div
       className='flex text-white'>
       
@@ -34,6 +39,8 @@ const App = () => {
 
       <Footer/>
     </div>
+
+    </Provider>
   )
 }
 
