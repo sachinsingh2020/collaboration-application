@@ -8,8 +8,7 @@ import LikesPage from "./Pages/LikesPage";
 import SlideBar from './components/SlideBar';
 import Footer from './components/Footer';
 import Login from './components/Login'
-import { Provider } from 'react-redux';
-import appStore from './utils/appStore';
+
 import { useSelector } from 'react-redux';
 import AllProjects from './Pages/AllProjects';
 const App = () => {
@@ -35,13 +34,14 @@ const App = () => {
 					<Route path='/explore' element={authUser ? <ExplorePage /> : <Navigate to={"/login"} />} />
 					<Route path='/likes' element={authUser ? <LikesPage /> : <Navigate to={"/login"} />} /> */}
 
-          <Route path='/' element={<HomePage />} />
-          <Route path='/login' element={<LoginPage />} />
-          <Route path='/signup' element={<SignUpPage />} />
-          <Route path='/explore' element={<ExplorePage />} />
-          <Route path='/likes' element={<LikesPage />} />
-          <Route path='/logi' element={<Login />} />
-          <Route path='/allprojects' element={<AllProjects />} />
+
+          <Route path="/home" element={status ? <HomePage /> : <Navigate to={"/"} />} />
+
+          <Route path="/" element={<Login />} />
+          {/* //<Route path='/login' element={<LoginPage />} /> */}
+          {/* <Route path='/signup' element={!status ? <SignUpPage /> :} /> */}
+          <Route path='/explore' element={status ? <ExplorePage /> : <Navigate to={"/"} />} />
+          <Route path='/likes' element={status ? <LikesPage /> : <Navigate to={"/"} />} />
 
         </Routes>
       </div>

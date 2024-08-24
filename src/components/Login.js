@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { addStatus } from "../utils/cardSlice";
+import { useNavigate } from "react-router-dom";
 
 
 const SignInSignUp = () => {
@@ -11,6 +12,7 @@ const SignInSignUp = () => {
   const [firstName, setfirstname] = useState("");
   const [lastName, setlastname] = useState("");
 
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
@@ -25,6 +27,7 @@ const SignInSignUp = () => {
         const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/login', { email, password });
         console.log("Sign in successful:", response.data);
         dispatch(addStatus(true));
+        navigate("/home")
       } else {
         // Handle sign-up API call
         const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', { firstName, lastName, email, password });
