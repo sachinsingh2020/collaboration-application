@@ -11,17 +11,17 @@ import Login from './components/Login'
 import { Provider } from 'react-redux';
 import appStore from './utils/appStore';
 import { useSelector } from 'react-redux';
+import AllProjects from './Pages/AllProjects';
 const App = () => {
 
-  const {status} = useSelector((state) => state.cards);
+  const { status } = useSelector((state) => state.cards);
   console.log(status);
 
-  if(status ==false)
-  {
-   // useNavigate
+  if (status == false) {
+    // useNavigate
   }
   return (
-    
+
     <div
       className='flex text-white'>
 
@@ -41,13 +41,15 @@ const App = () => {
           <Route path='/explore' element={<ExplorePage />} />
           <Route path='/likes' element={<LikesPage />} />
           <Route path='/logi' element={<Login />} />
+          <Route path='/allprojects' element={<AllProjects />} />
+
         </Routes>
       </div>
 
       <Footer />
     </div>
 
-   
+
   )
 }
 

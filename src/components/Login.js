@@ -9,16 +9,16 @@ const SignInSignUp = () => {
   const [email, setEmail] = useState(""); // State for email
   const [password, setPassword] = useState(""); // State for password
   const [firstName, setfirstname] = useState("");
-  const [lastName,setlastname] = useState("");
-  
-  const dispatch =  useDispatch();
+  const [lastName, setlastname] = useState("");
+
+  const dispatch = useDispatch();
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
+
     try {
       if (isSignIn) {
         // Handle sign-in API call
@@ -27,10 +27,10 @@ const SignInSignUp = () => {
         dispatch(addStatus(true));
       } else {
         // Handle sign-up API call
-        const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', {firstName,lastName, email, password });
+        const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', { firstName, lastName, email, password });
         console.log("Sign up successful:", response.data);
-          
-          dispatch(addStatus(true))
+
+        dispatch(addStatus(true))
       }
     } catch (error) {
 
@@ -39,7 +39,7 @@ const SignInSignUp = () => {
       dispatch(addStatus(false));
     }
   };
-  
+
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -47,8 +47,8 @@ const SignInSignUp = () => {
         <h2 className="text-3xl font-semibold text-white text-center mb-6">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h2>
-        <form  onSubmit={handleSubmit}>
-        {!isSignIn && (
+        <form onSubmit={handleSubmit}>
+          {!isSignIn && (
             <input
               type="text"
               placeholder="First Name"
@@ -85,7 +85,7 @@ const SignInSignUp = () => {
             onChange={(e) => setPassword(e.target.value)} // Update state on change
             className="w-full px-4 py-2 mb-4 border border-gray-700 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
           />
-        
+
           <button
             type="submit"
             className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors"
