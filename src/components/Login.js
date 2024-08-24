@@ -8,7 +8,7 @@ const SignInSignUp = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white">
+    <div className="flex items-center justify-center min-h-screen">
       <div className="bg-black bg-opacity-70 p-8 rounded-2xl shadow-md w-96">
         <h2 className="text-3xl font-semibold text-white text-center mb-6">
           {isSignIn ? "Sign In" : "Sign Up"}
