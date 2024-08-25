@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addStatus } from "../utils/cardSlice";
 import { useNavigate } from "react-router-dom";
+import { login, register } from "../redux/actions/user";
 
 
 const SignInSignUp = () => {
@@ -18,29 +19,48 @@ const SignInSignUp = () => {
     setIsSignIn(!isSignIn);
   };
 
+  const { message, error, isAuthenticated, loading } = useSelector(state => state.user);
+
+
+  useEffect(() => {
+    if (error) {
+      dispatch({ type: 'clearError' });
+    }
+    if (message) {
+      dispatch({ type: 'clearMessage' });
+    }
+    if (isAuthenticated) {
+      navigate('/home');
+    }
+  }, [dispatch, error, message, isAuthenticated])
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    try {
-      if (isSignIn) {
-        // Handle sign-in API call
-        const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/login', { email, password });
-        console.log("Sign in successful:", response.data);
-        dispatch(addStatus(true));
-        navigate("/home")
-      } else {
-        // Handle sign-up API call
-        const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', { firstName, lastName, email, password });
-        console.log("Sign up successful:", response.data);
-
-        dispatch(addStatus(true))
-      }
-    } catch (error) {
-
-      alert("no")
-      console.error("There was an error:", error.response ? error.response.data.message : error.message);
-      dispatch(addStatus(false));
+    if (isSignIn) {
+      await dispatch(login({ email, password }));
+    } else {
+      await dispatch(register({ firstName, lastName, email, password }));
     }
+    //   try {
+    //     if (isSignIn) {
+    //       // Handle sign-in API call
+    //       const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/login', { email, password });
+    //       console.log("Sign in successful:", response.data);
+    //       dispatch(addStatus(true));
+    //       navigate("/home")
+    //     } else {
+    //       // Handle sign-up API call
+    //       const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', { firstName, lastName, email, password });
+    //       console.log("Sign up successful:", response.data);
+
+    //       dispatch(addStatus(true))
+    //     }
+    //   } catch (error) {
+
+    //     alert("no")
+    //     console.error("There was an error:", error.response ? error.response.data.message : error.message);
+    //     dispatch(addStatus(false));
+    //   }
   };
 
 

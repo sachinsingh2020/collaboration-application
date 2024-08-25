@@ -1,24 +1,19 @@
-import axios from 'axios';
-import React, { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { openProject } from '../redux/actions/project';
 
 const AllProjects = () => {
+    const { projects } = useSelector((state) => state.projects);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
 
+    const openProjectFunction = async (e, projectId) => {
+        e.preventDefault();
 
-    const [myProjects, setMyProjects] = useState([]);
-
-    const projectsArray = useSelector((state) => state.projects);
-
-    console.log({ myProjects });
-
-    useEffect(() => {
-        setMyProjects(projectsArray);
-    }, [projectsArray])
-
-    useEffect(() => {
-        console.log({ myProjects });
-    }, [myProjects])
-
+        await dispatch(openProject(projectId));
+        await navigate(`/project/${projectId}`);
+    }
 
     return (
         <div className='relative overflow-x-auto shadow-md rounded-lg px-4'>
@@ -40,14 +35,18 @@ const AllProjects = () => {
                     </tr>
                 </thead>
                 <tbody>
-
-                    <tr className='bg-glass border-b'>
-
-                    </tr>
+                    {projects.map((project, index) => (
+                        <tr key={index} className='bg-glass border-b'>
+                            <td className='p-4'>{index + 1}</td>
+                            <td className='p-4 cursor-pointer' onClick={(e) => openProjectFunction(e, project._id)}>{project.name}</td>
+                            <td className='p-4'>{project.uploadedBy}</td>
+                            <td className='p-4'>{project.likeCount}</td>
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         </div>
-    )
+    );
 }
 
-export default AllProjects
+export default AllProjects;
