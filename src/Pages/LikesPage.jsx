@@ -2,25 +2,6 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 
 const LikesPage = () => {
-	const [likeData, setLikeData] = useState([]);
-
-	const myFunction = async () => {
-		const response = await axios.get('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/mylikedrepos', {
-			withCredentials: true
-		}
-		);
-		console.log({ response })
-		const data = response.data;
-		setLikeData(data);
-	}
-
-	useEffect(() => {
-		myFunction();
-	}, [])
-
-	useEffect(() => {
-		console.log({ likeData })
-	}, [])
 
 
 	return (
