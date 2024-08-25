@@ -9,16 +9,17 @@ import SlideBar from './components/SlideBar';
 import Footer from './components/Footer';
 import Login from './components/Login'
 
-import { useSelector } from 'react-redux';
+
+
 const App = () => {
 
-  const {status} = useSelector((state) => state.cards);
-  console.log(status);
+  // const {status} = useSelector((state) => state.cards);
+  // console.log(status);
 
-  if(status ==false)
-  {
-   // useNavigate
-  }
+  // if(status ==false)
+  // {
+  //  // useNavigate
+  // }
   return (
     
     <div
@@ -49,7 +50,7 @@ const App = () => {
       <Footer />
     </div>
 
-   
+    
   )
 }
 
