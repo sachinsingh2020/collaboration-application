@@ -1,8 +1,30 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
 const LikesPage = () => {
-  return (
-    <div className='relative overflow-x-auto shadow-md rounded-lg px-4'>
+	const [likeData, setLikeData] = useState([]);
+
+	const myFunction = async () => {
+		const response = await axios.get('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/mylikedrepos', {
+			withCredentials: true
+		}
+		);
+		console.log({ response })
+		const data = response.data;
+		setLikeData(data);
+	}
+
+	useEffect(() => {
+		myFunction();
+	}, [])
+
+	useEffect(() => {
+		console.log({ likeData })
+	}, [])
+
+
+	return (
+		<div className='relative overflow-x-auto shadow-md rounded-lg px-4'>
 			<table className='w-full text-sm text-left rtl:text-right bg-glass overflow-hidden'>
 				<thead className='text-xs uppercase bg-glass'>
 					<tr>
@@ -21,16 +43,16 @@ const LikesPage = () => {
 					</tr>
 				</thead>
 				<tbody>
-					
-							<tr className='bg-glass border-b'>
-                <td className='w-4 p-4'>
-                  1
-                  </td>
-              </tr>
+
+					<tr className='bg-glass border-b'>
+						<td className='w-4 p-4'>
+							1
+						</td>
+					</tr>
 				</tbody>
 			</table>
 		</div>
-  )
+	)
 }
 
 export default LikesPage

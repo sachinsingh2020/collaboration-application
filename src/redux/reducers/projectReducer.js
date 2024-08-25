@@ -12,6 +12,9 @@ const openProjectFailure = createAction('openProjectFailure');
 const downloadProjectRequest = createAction('downloadProjectRequest');
 const downloadProjectSuccess = createAction('downloadProjectSuccess');
 const downloadProjectFailure = createAction('downloadProjectFailure');
+const getRedirectLinkRequest = createAction('getRedirectLinkRequest');
+const getRedirectLinkSuccess = createAction('getRedirectLinkSuccess');
+const getRedirectLinkFailure = createAction('getRedirectLinkFailure');
 const clearError = createAction('clearError');
 const clearMessage = createAction('clearMessage');
 
@@ -64,6 +67,17 @@ export const projectReducer = createReducer({
             state.message = action.payload;
         })
         .addCase(downloadProjectFailure, (state, action) => {
+            state.loading = false;
+            state.error = action.payload;
+        })
+        .addCase(getRedirectLinkRequest, (state) => {
+            state.loading = true;
+        })
+        .addCase(getRedirectLinkSuccess, (state, action) => {
+            state.loading = false;
+            state.message = action.payload;
+        })
+        .addCase(getRedirectLinkFailure, (state, action) => {
             state.loading = false;
             state.error = action.payload;
         })

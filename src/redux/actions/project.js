@@ -54,3 +54,20 @@ export const downloadProject = (projectId) => async (dispatch) => {
         dispatch({ type: 'downloadProjectFailure', payload: error.response.data.message });
     }
 }
+
+export const redirectToGoogleDrive = (projectId) => async (dispatch) => {
+    try {
+        dispatch({ type: 'getRedirectLinkRequest' });
+
+        const response = await axios.get(`${server}/redirect/${projectId}`);
+
+        const data = response.data;
+        console.log({ data })
+
+        dispatch({ type: 'getRedirectLinkSuccess', payload: data });
+
+    }
+    catch (error) {
+        dispatch({ type: 'getRedirectLinkFailure', payload: error.response.data.message });
+    }
+}
