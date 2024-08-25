@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addStatus } from "../utils/cardSlice";
 import { useNavigate } from "react-router-dom";
+import { login, register } from "../redux/actions/user";
 
 
 const SignInSignUp = () => {
@@ -10,40 +11,58 @@ const SignInSignUp = () => {
   const [email, setEmail] = useState(""); // State for email
   const [password, setPassword] = useState(""); // State for password
   const [firstName, setfirstname] = useState("");
-  const [lastName,setlastname] = useState("");
-  
+  const [lastName, setlastname] = useState("");
+
   const navigate = useNavigate();
-  const dispatch =  useDispatch();
+  const dispatch = useDispatch();
   const toggleForm = () => {
     setIsSignIn(!isSignIn);
   };
 
+  const { message, error, isAuthenticated, loading } = useSelector(state => state.user);
+
+
+  useEffect(() => {
+    if (error) {
+      dispatch({ type: 'clearError' });
+    }
+    if (message) {
+      dispatch({ type: 'clearMessage' });
+    }
+    if (isAuthenticated) {
+      navigate('/home');
+    }
+  }, [dispatch, error, message, isAuthenticated])
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    
-    try {
-      if (isSignIn) {
-        // Handle sign-in API call
-        const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/login', { email, password });
-        console.log("Sign in successful:", response.data);
-        dispatch(addStatus(true));
-        navigate("/home")
-      } else {
-        // Handle sign-up API call
-        const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', {firstName,lastName, email, password });
-        console.log("Sign up successful:", response.data);
-          
-          dispatch(addStatus(true))
-          navigate("/home");
-      }
-    } catch (error) {
-
-      alert("no")
-      console.error("There was an error:", error.response ? error.response.data.message : error.message);
-      dispatch(addStatus(false));
+    if (isSignIn) {
+      await dispatch(login({ email, password }));
+    } else {
+      await dispatch(register({ firstName, lastName, email, password }));
     }
+    //   try {
+    //     if (isSignIn) {
+    //       // Handle sign-in API call
+    //       const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/login', { email, password });
+    //       console.log("Sign in successful:", response.data);
+    //       dispatch(addStatus(true));
+    //       navigate("/home")
+    //     } else {
+    //       // Handle sign-up API call
+    //       const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', { firstName, lastName, email, password });
+    //       console.log("Sign up successful:", response.data);
+
+    //       dispatch(addStatus(true))
+    //     }
+    //   } catch (error) {
+
+    //     alert("no")
+    //     console.error("There was an error:", error.response ? error.response.data.message : error.message);
+    //     dispatch(addStatus(false));
+    //   }
   };
-  
+
 
   return (
     <div className="flex items-center justify-center min-h-screen">
@@ -51,8 +70,8 @@ const SignInSignUp = () => {
         <h2 className="text-3xl font-semibold text-white text-center mb-6">
           {isSignIn ? "Sign In" : "Sign Up"}
         </h2>
-        <form  onSubmit={handleSubmit}>
-        {!isSignIn && (
+        <form onSubmit={handleSubmit}>
+          {!isSignIn && (
             <input
               type="text"
               placeholder="First Name"
@@ -89,7 +108,7 @@ const SignInSignUp = () => {
             onChange={(e) => setPassword(e.target.value)} // Update state on change
             className="w-full px-4 py-2 mb-4 border border-gray-700 rounded-lg bg-gray-900 text-white focus:outline-none focus:ring-2 focus:ring-gray-800"
           />
-        
+
           <button
             type="submit"
             className="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition-colors"
