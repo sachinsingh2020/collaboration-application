@@ -1,7 +1,7 @@
 import { FaCodeBranch, FaCopy, FaRegStar } from "react-icons/fa";
 import { FaCodeFork } from "react-icons/fa6";
 
-const Repo = () => {
+const Repo = ({user}) => {
 	return (
 		<li className='mb-10 ms-7'>
 			<span
@@ -17,36 +17,27 @@ const Repo = () => {
 					rel='noreferrer'
 					className='flex items-center gap-2 text-lg font-semibold'
 				>
-					mern-chat-app
+					{user.name}
 				</a>
 				<span
 					className='bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5
 					py-0.5 rounded-full flex items-center gap-1'
 				>
-					<FaRegStar /> 167
+					<FaRegStar /> {user.likeCount}
 				</span>
-				<span
-					className='bg-purple-100 text-purple-800 text-xs font-medium
-					 px-2.5 py-0.5 rounded-full flex items-center gap-1'
-				>
-					<FaCodeFork /> 25
-				</span>
-				<span
-					className='cursor-pointer bg-green-100 text-green-800 text-xs
-					font-medium px-2.5 py-0.5 rounded-full flex items-center gap-1'
-				>
-					<FaCopy /> Clone
-				</span>
+				
 			</div>
 
 			<time
 				className='block my-1 text-xs font-normal leading-none
 			 text-gray-400'
 			>
-				Released on Jan 1, 2021
+				{user.uploadedAt}
 			</time>
-			<p className='mb-4 text-base font-normal text-gray-500'>Real Time Chat App | MERN && Socket.io && JWT</p>
-			<img src={"/javascript.svg"} alt='Programming language icon' className='h-8' />
+			<p className='mb-4 text-base font-normal text-gray-500'>Type - {user.type}</p>
+
+            <p className='mb-4 text-base font-bold text-gray-500'>Owner - {user.uploadedBy}</p>
+			
 		</li>
 	);
 };
