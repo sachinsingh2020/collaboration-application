@@ -1,7 +1,7 @@
 import { FaCodeBranch, FaCopy, FaRegStar } from "react-icons/fa";
 import { FaCodeFork } from "react-icons/fa6";
 
-const Repo = ({user}) => {
+const Repo = ({ user }) => {
 	return (
 		<li className='mb-10 ms-7'>
 			<span
@@ -12,7 +12,7 @@ const Repo = ({user}) => {
 			</span>
 			<div className='flex gap-2 items-center flex-wrap'>
 				<a
-					href={"https://github.com/burakorkmez/mern-chat-app"}
+
 					target='_blank'
 					rel='noreferrer'
 					className='flex items-center gap-2 text-lg font-semibold'
@@ -25,7 +25,7 @@ const Repo = ({user}) => {
 				>
 					<FaRegStar /> {user.likeCount}
 				</span>
-				
+
 			</div>
 
 			<time
@@ -36,9 +36,9 @@ const Repo = ({user}) => {
 			</time>
 			<p className='mb-4 text-base font-normal text-gray-500'>Type - {user.type}</p>
 
-            <p className='mb-4 text-base font-bold text-gray-500'>Owner - {user.uploadedBy}</p>
-			
-		</li>
+			<p className='mb-4 text-base font-bold text-gray-500'>Owner - {user.uploadedBy}</p>
+
+		</li >
 	);
 };
 

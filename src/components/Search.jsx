@@ -2,7 +2,9 @@ import { IoSearch } from "react-icons/io5";
 
 const Search = () => {
 	return (
-		<form className='max-w-xl mx-auto p-2 sm:w-72'>
+		<form className='max-w-xl mx-auto p-2 sm:w-82'
+
+		>
 			<label htmlFor='default-search' className='mb-2 text-sm font-medium text-gray-900 sr-only'>
 				Search
 			</label>
@@ -14,7 +16,7 @@ const Search = () => {
 					type='search'
 					id='default-search'
 					className='block w-full p-4 ps-10 text-sm rounded-lg bg-glass focus:ring-blue-500 focus:border-blue-500 bg-transparent focus:bg-transparent '
-					placeholder='i.e. johndoe'
+					placeholder='i.e. DK Fashion'
 					required
 				/>
 				<button

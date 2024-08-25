@@ -7,6 +7,8 @@ import { MdOutlineExplore } from "react-icons/md";
 import { PiSignInBold } from "react-icons/pi";
 import { MdEditDocument } from "react-icons/md";
 import Logout from './Logout';
+import ourImage from "../assests/ourImage.png"
+import { CiAlarmOff } from "react-icons/ci";
 
 const SlideBar = () => {
 
@@ -17,7 +19,7 @@ const SlideBar = () => {
 		>
 			<nav className='h-full flex flex-col gap-3'>
 				<Link to='/' className='flex justify-center'>
-					<img className='h-8' src={githubImage} alt='Github Logo' />
+					<CiAlarmOff size={30} className='text-white' />
 				</Link>
 
 				<Link
@@ -35,12 +37,12 @@ const SlideBar = () => {
 				</Link>
 
 
-				<Link
+				{/* <Link
 					to='/explore'
 					className='p-1.5 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800'
 				>
 					<MdOutlineExplore size={25} />
-				</Link>
+				</Link> */}
 
 				<Link
 					to='/allprojects'
@@ -49,25 +51,25 @@ const SlideBar = () => {
 					<MdOutlineExplore size={25} />
 				</Link>
 
-				<Link
+				{/* <Link
 					to='/upload'
 					className='p-1.5 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800'
 				>
 					<MdOutlineExplore size={25} />
-				</Link>
-
+				</Link> */}
+				{/* 
 				<Link
 					to='/login'
 					className='p-1.5 focus:outline-nones transition-colors duration-200 rounded-lg hover:bg-gray-800'
 				>
 					<PiSignInBold size={25} />
-				</Link>
-				<Link
+				</Link> */}
+				{/* <Link
 					to='/signup'
 					className='p-1.5 focus:outline-nones transition-colors duration-200 rounded-lg hover:bg-gray-800'
 				>
 					<MdEditDocument size={25} />
-				</Link>
+				</Link> */}
 
 				<div className='flex flex-col gap-2 mt-auto'>
 					<Logout />

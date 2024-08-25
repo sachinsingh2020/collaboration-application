@@ -29,7 +29,7 @@ const HomePage = () => {
   // }, [])
   return (
     <div className='m-4'>
-			{/* <Search onSearch={onSearch} />
+      {/* <Search onSearch={onSearch} />
 			{repos.length > 0 && <SortRepos onSort={onSort} sortType={sortType} />}
 			<div className='flex gap-4 flex-col lg:flex-row justify-center items-start'>
 				{userProfile && !loading && <ProfileInfo userProfile={userProfile} />}
@@ -37,14 +37,16 @@ const HomePage = () => {
 				{!loading && <Repos repos={repos} />}
 				{loading && <Spinner />}
 			</div> */}
-      <Search/>
-      <SortRepo/>
-      <div>
-        <ProfileInfo/>
+      <Search />
+      <SortRepo />
+      <div
+        className='flex gap-4 flex-col lg:flex-row justify-center items-start'
+      >
+        <ProfileInfo />
 
-        <Repos/>
+        <Repos />
       </div>
-		</div>
+    </div>
   )
 }
 

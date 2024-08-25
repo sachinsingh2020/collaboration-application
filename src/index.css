@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-	background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)),url("assests/bg.png");
+	background: linear-gradient(to bottom right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.4)), url("./assests/bgimage2.jpg");
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: center;
@@ -26,9 +26,9 @@ body {
 ::-webkit-scrollbar-thumb:hover {
 	background: #242424;
 }
+
 @layer components {
 	.bg-glass {
-		@apply bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 
-		hover:bg-gray-600/10 border border-gray-800 text-white;
+		@apply bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 hover:bg-gray-600/10 border border-gray-800 text-white;
 	}
 }
