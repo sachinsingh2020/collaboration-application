@@ -18,13 +18,8 @@ const App = () => {
   const { isAuthenticated } = useSelector(state => state.user);
   console.log({ isAuthenticated })
 
-  const {status} = useSelector((state) => state.cards);
-  console.log(status);
+  const dispatch = useDispatch();
 
-  if(status ==false)
-  {
-   // useNavigate
-  }
   return (
 
     <div
@@ -95,7 +90,7 @@ const App = () => {
       <Footer />
     </div>
 
-   
+
   )
 }
 

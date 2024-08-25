@@ -25,7 +25,17 @@ const HomePage = () => {
   //   dispatch(addProject(data));
   // }, [])
   return (
-    <div>HomePage</div>
+    <div className='m-4'>
+			{/* <Search onSearch={onSearch} />
+			{repos.length > 0 && <SortRepos onSort={onSort} sortType={sortType} />}
+			<div className='flex gap-4 flex-col lg:flex-row justify-center items-start'>
+				{userProfile && !loading && <ProfileInfo userProfile={userProfile} />}
+
+				{!loading && <Repos repos={repos} />}
+				{loading && <Spinner />}
+			</div> */}
+      HomePage
+		</div>
   )
 }
 
