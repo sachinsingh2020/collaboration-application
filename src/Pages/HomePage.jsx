@@ -21,7 +21,7 @@ const HomePage = () => {
   }, [])
 
   // useEffect(async () => {
-  //   const response = await axios.get('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/getallpublicrepos');
+  //   const response = await axios.get('https://iit-collaboration-backend-3.vercel.app/api/v1/getallpublicrepos');
   //   const data = response.data.publicRepos;
   //   console.log({ data });
   //   setProjects(data);

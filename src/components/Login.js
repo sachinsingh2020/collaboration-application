@@ -46,13 +46,13 @@ const SignInSignUp = () => {
     //   try {
     //     if (isSignIn) {
     //       // Handle sign-in API call
-    //       const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/login', { email, password });
+    //       const response = await axios.post('https://iit-collaboration-backend-3.vercel.app/api/v1/login', { email, password });
     //       console.log("Sign in successful:", response.data);
     //       dispatch(addStatus(true));
     //       navigate("/home")
     //     } else {
     //       // Handle sign-up API call
-    //       const response = await axios.post('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/register', { firstName, lastName, email, password });
+    //       const response = await axios.post('https://iit-collaboration-backend-3.vercel.app/api/v1/register', { firstName, lastName, email, password });
     //       console.log("Sign up successful:", response.data);
 
     //       dispatch(addStatus(true))

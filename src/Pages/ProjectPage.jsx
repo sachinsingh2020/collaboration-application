@@ -34,7 +34,7 @@ const ProjectPage = () => {
 
     const downloadZipFile = async () => {
         try {
-            const response = await axios.get(`https://iiit-colloboration-app-backend-2.vercel.app/api/v1/redirect/${params.projectId}`);
+            const response = await axios.get(`https://iit-collaboration-backend-3.vercel.app/api/v1/redirect/${params.projectId}`);
             const redirectLink = response.data.link;
             window.location.href = redirectLink;
         } catch (error) {
@@ -57,7 +57,7 @@ const ProjectPage = () => {
         e.preventDefault(); // Prevent the form from reloading the page
 
         try {
-            const response = await axios.put(`https://iiit-colloboration-app-backend-2.vercel.app/api/v1/addcollaborator/${params.projectId}`, {
+            const response = await axios.put(`https://iit-collaboration-backend-3.vercel.app/api/v1/addcollaborator/${params.projectId}`, {
                 email: givenEmail,
             }, {
                 withCredentials: true

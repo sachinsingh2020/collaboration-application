@@ -4,7 +4,7 @@ import axios from 'axios'
 export const register = (user) => async (dispatch) => {
     try {
         dispatch({ type: 'signUpRequest' });
-
+        console.log({ user });
         const { data } = await axios.post(`${server}/register`, user, {
             headers: {
                 'Content-Type': 'application/json',

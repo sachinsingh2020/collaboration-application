@@ -12,7 +12,7 @@ const LikesPage = () => {
 	useEffect(() => {
 		const fetchLikedRepos = async () => {
 			try {
-				const response = await axios.get('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/mylikedrepos', {
+				const response = await axios.get('https://iit-collaboration-backend-3.vercel.app/api/v1/mylikedrepos', {
 					withCredentials: true, // Include credentials with the request
 				});
 				setRepos(response?.data?.myLikedRepos);

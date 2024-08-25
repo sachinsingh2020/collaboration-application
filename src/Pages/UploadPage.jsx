@@ -29,7 +29,7 @@ const UploadPage = () => {
                 formData.append('name', fileName);
                 formData.append('type', fileType);
 
-                const response = await axios.post("https://iiit-colloboration-app-backend-2.vercel.app/api/v1/upload", formData, {
+                const response = await axios.post("https://iit-collaboration-backend-3.vercel.app/api/v1/upload", formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     },

@@ -13,4 +13,4 @@ const store = configureStore({
 
 export default store
 
-export const server = "https://iiit-colloboration-app-backend-2.vercel.app/api/v1"
+export const server = "https://iit-collaboration-backend-3.vercel.app/api/v1"
