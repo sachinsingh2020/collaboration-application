@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addStatus } from "../utils/cardSlice";
 import { useNavigate } from "react-router-dom";
 import { login, register } from "../redux/actions/user";
+import toast from "react-hot-toast";
 
 
 const SignInSignUp = () => {
@@ -30,6 +31,7 @@ const SignInSignUp = () => {
       dispatch({ type: 'clearMessage' });
     }
     if (isAuthenticated) {
+      toast.success(message);
       navigate('/home');
     }
   }, [dispatch, error, message, isAuthenticated])

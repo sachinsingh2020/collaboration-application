@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import Modal from 'react-modal';
+import toast from 'react-hot-toast';
 
 const customStyles = {
     content: {
@@ -48,30 +49,40 @@ const ProjectPage = () => {
     const closeModal = () => {
         setIsOpen(false);
     };
+
+    const [givenEmail, setGivenEmail] = useState('');
     const [collaborators, setCollaborators] = useState([]);
-    const addCollaboratorFunction = async () => {
+
+    const addCollaboratorFunction = async (e) => {
+        e.preventDefault(); // Prevent the form from reloading the page
+
         try {
-            const collaboratorName = document.querySelector('input').value;
-            collaborators.push(collaboratorName);
-            const response = await axios.post(`https://iiit-colloboration-app-backend-2.vercel.app/api/v1/addcollaborator/${params.projectId}`, {
-                collaborators,
+            const response = await axios.put(`https://iiit-colloboration-app-backend-2.vercel.app/api/v1/addcollaborator/${params.projectId}`, {
+                email: givenEmail,
+            }, {
+                withCredentials: true
             });
             console.log({ response });
+            toast.success(response.data.message);
+            closeModal(); // Close the modal after adding a collaborator
         } catch (error) {
             console.error("Failed to add collaborator", error);
         }
-        closeModal();
-    }
+    };
 
     return (
         repo && (
             <div className="max-w-3xl mx-auto my-12 p-10 bg-gray-100 shadow-md rounded-lg">
-                <h1 className="text-3xl font-bold text-gray-800 mb-4">{repo.name}</h1>
+                <h1 className="text-3xl font-bold text-gray-800 mb-6">{repo.name}</h1>
 
-                <div className="grid grid-cols-2 gap-4 mb-6">
+                <div className="flex flex-col gap-4 mb-6">
                     <div>
                         <h2 className="text-sm font-medium text-gray-600">Collaborators</h2>
-                        <p className="text-base text-gray-900">{repo.collaborators}</p>
+                        {
+                            repo.collaboratorsEmail.map((email, index) => (
+                                <p key={index} className="text-base text-gray-900">{email}</p>
+                            ))
+                        }
                     </div>
                     <div>
                         <h2 className="text-sm font-medium text-gray-600">Likes</h2>
@@ -110,13 +121,16 @@ const ProjectPage = () => {
                     <h2 className="text-xl font-semibold mb-4">Add Collaborator</h2>
                     <button onClick={closeModal} className="text-red-500 hover:text-red-700 transition duration-200 mb-4">Close</button>
                     <div>
-                        <form>
+                        <form onSubmit={addCollaboratorFunction}>
                             <input
+                                type="text"
+                                value={givenEmail}
+                                onChange={(e) => setGivenEmail(e.target.value)}
                                 className="w-full mb-4 p-2 border rounded"
-                                placeholder="Enter collaborator's name"
+                                placeholder="Enter collaborator's email"
                             />
                             <button
-                                onClick={addCollaboratorFunction}
+                                type="submit"
                                 className="w-full bg-blue-500 hover:bg-blue-600 text-white py-2 rounded-md transition-colors duration-300 ease-in-out"
                             >
                                 Add Collaborator

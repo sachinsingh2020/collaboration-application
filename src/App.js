@@ -12,6 +12,9 @@ import { ProtectedRoute } from 'protected-route-react';
 import AllProjects from './Pages/AllProjects';
 import { useDispatch, useSelector } from 'react-redux';
 import ProjectPage from './Pages/ProjectPage';
+import UploadPage from './Pages/UploadPage';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 
 const App = () => {
@@ -83,11 +86,21 @@ const App = () => {
               <ProjectPage />
             </ProtectedRoute>} />
 
+          <Route exact path='/upload' element={
+            <ProtectedRoute
+              isAuthenticated={isAuthenticated}
+              redirect="/"
+            >
+              <UploadPage />
+            </ProtectedRoute>} />
+
 
         </Routes>
       </div>
 
       <Footer />
+      <Toaster />
+
     </div>
 
 

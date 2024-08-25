@@ -50,6 +50,13 @@ const SlideBar = () => {
 				</Link>
 
 				<Link
+					to='/upload'
+					className='p-1.5 flex justify-center transition-colors duration-200 rounded-lg hover:bg-gray-800'
+				>
+					<MdOutlineExplore size={25} />
+				</Link>
+
+				<Link
 					to='/login'
 					className='p-1.5 focus:outline-nones transition-colors duration-200 rounded-lg hover:bg-gray-800'
 				>
