@@ -1,29 +1,38 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 const LikesPage = () => {
-	const [likeData, setLikeData] = useState([]);
+	const [repos, setRepos] = useState([]);
+  const [error, setError] = useState(null);
 
-	const myFunction = async () => {
-		const response = await axios.get('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/mylikedrepos', {
-			withCredentials: true
-		}
-		);
-		console.log({ response })
-		const data = response.data;
-		setLikeData(data);
-	}
+  useEffect(()=>{
+	console.log({repos})
+  },[repos])
 
-	useEffect(() => {
-		myFunction();
-	}, [])
+  useEffect(() => {
+    const fetchLikedRepos = async () => {
+      try {
+        const response = await axios.get('https://iiit-colloboration-app-backend-2.vercel.app/api/v1/mylikedrepos', {
+			withCredentials: true, // Include credentials with the request
+		  });
+        setRepos(response?.data?.myLikedRepos);
+      } catch (err) {
+        setError(err.message);
+      }
+    };
 
-	useEffect(() => {
-		console.log({ likeData })
-	}, [])
+    fetchLikedRepos();
+  }, []);
 
-
-	return (
-		<div className='relative overflow-x-auto shadow-md rounded-lg px-4'>
+  const uploadedDate = new Date(repos.uploadedAt);
+  const formattedDate = uploadedDate.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+	
+  return (
+    <div className='relative overflow-x-auto shadow-md rounded-lg px-4'>
 			<table className='w-full text-sm text-left rtl:text-right bg-glass overflow-hidden'>
 				<thead className='text-xs uppercase bg-glass'>
 					<tr>
@@ -46,16 +55,33 @@ const LikesPage = () => {
 					</tr>
 				</thead>
 				<tbody>
+					{
+						repos.map((user)=>(
+					<tr className='bg-glass border-b'>
+
+                 		<td className='w-4 p-4'>
+                            {user.name}
+                  		</td> 
+
+						  <td className='w-4 p-4'>
+                            {formattedDate}
+                  		</td> 
+
+						  <td className='w-4 p-4'>
+                            {user.type}
+                  		</td> 
+						  <td className='w-4 p-4'>
+                            {user.uploadedBy}
+                  		</td> 
+              		</tr>
+						))
+					}
 					
-							<tr className='bg-glass border-b'>
-                <td className='w-4 p-4'>
-                  1
-                  </td>
-              </tr>
+							
 				</tbody>
 			</table>
 		</div>
-	)
+  )
 }
 
 export default LikesPage
