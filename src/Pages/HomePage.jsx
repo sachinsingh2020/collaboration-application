@@ -3,7 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { addProject } from '../utils/projectsSlice';
 import { getProjects } from '../redux/actions/project';
-
+import Search from '../components/Search'
+import SortRepo from '../components/SortRepo';
+import ProfileInfo from '../components/ProfileInfo'
+import Repos from '../components/Repos';
 const HomePage = () => {
   const [projects, setProjects] = useState([]);
 
@@ -34,7 +37,13 @@ const HomePage = () => {
 				{!loading && <Repos repos={repos} />}
 				{loading && <Spinner />}
 			</div> */}
-      HomePage
+      <Search/>
+      <SortRepo/>
+      <div>
+        <ProfileInfo/>
+
+        <Repos/>
+      </div>
 		</div>
   )
 }

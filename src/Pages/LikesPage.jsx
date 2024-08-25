@@ -24,7 +24,7 @@ const LikesPage = () => {
     fetchLikedRepos();
   }, []);
 
-  const uploadedDate = new Date(repos.uploadedAt);
+  const uploadedDate = new Date(repos?.uploadedAt);
   const formattedDate = uploadedDate.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
